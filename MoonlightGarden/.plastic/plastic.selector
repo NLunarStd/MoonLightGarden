@@ -1,0 +1,3 @@
+repository "PrototypeMoonlightGarden@lunardplaygame@cloud"
+  path "/"
+    smartbranch "/main/Dev"

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bd23fe51d5e9947be5b7a72a7c9d8b, type: 3}
+  m_Name: BuildingA
+  m_EditorClassIdentifier: 
+  itemName: BuildingSword
+  itemDescription: 
+  maxAmount: 1
+  itemImage: {fileID: 6766366755343693004, guid: cea11b661d3fe134b90de064b08a5372, type: 3}
+  prefabs: {fileID: 8887636468334162527, guid: 6f318a1f0d064b74fa0962a792dbbd08, type: 3}

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Structure
+  - Interactor
+  - Monster
+  - Friendly
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - DeepWater
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Ground
+    uniqueID: 2443320287
+    locked: 0
+  - name: Building
+    uniqueID: 1618500215
+    locked: 0
+  - name: Character
+    uniqueID: 1616537663
+    locked: 0
+  - name: FX
+    uniqueID: 2176240861
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: EdgeCloud
+    uniqueID: 3084415029
+    locked: 0
+  m_RenderingLayers:
+  - Default
