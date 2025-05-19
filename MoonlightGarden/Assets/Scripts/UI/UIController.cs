@@ -21,7 +21,13 @@ public class UIController : MonoBehaviour
     }
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI pauseDatText;
+    public TextMeshProUGUI playerName;
     public TextMeshProUGUI pausePlayerName;
+
+    public Image hpFill;
+    public Image flowerHPFill;
+
+    public TextMeshProUGUI flowerAlertText;
 
     public Transform itemBarPanel;
     public Transform[] uiItemSlot;
@@ -40,6 +46,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         SetUpUIInventorySlots();
+        SetUPInDisplayColorColor();
         UpdateInventoryUI();
     }
 
@@ -136,6 +143,7 @@ public class UIController : MonoBehaviour
     }
     public void UpdatePlayerName()
     {
+        playerName.text = GameManager.instance.playerName;
         pausePlayerName.text = GameManager.instance.playerName;
     }
 
@@ -166,5 +174,74 @@ public class UIController : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    private Color normalInDisplayColor = Color.white;
+    private Color damagedDisplayColor = Color.red;
+    public Gradient damageColorGradient = new Gradient();
+    public Image inDisplayPortraitImage;
+    void SetUPInDisplayColorColor()
+    {
+        GradientColorKey[] colorKeys = new GradientColorKey[2];
+        colorKeys[0] = new GradientColorKey(normalInDisplayColor, 1f);
+        colorKeys[1] = new GradientColorKey(damagedDisplayColor, 0f);
+
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+        alphaKeys[0] = new GradientAlphaKey(1f, 1f);
+        alphaKeys[1] = new GradientAlphaKey(1f, 0f);
+        damageColorGradient.SetKeys(colorKeys, alphaKeys);
+
+    }
+    public void UpdateHP(float amount)
+    { 
+        hpFill.fillAmount = amount;
+        Color targetColor = damageColorGradient.Evaluate(amount);
+        inDisplayPortraitImage.color = targetColor;
+    }
+    public void UpdateFlowerHP(float amount)
+    {
+        flowerHPFill.fillAmount = amount;
+    }
+    public Transform respawningPanel;
+    public void ToggleRespawningScreen()
+    {
+        if (respawningPanel.gameObject.activeSelf == true)
+        {
+            respawningPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            respawningPanel.gameObject.SetActive(true);
+        }
+    }
+    public TextMeshProUGUI respawnCoolDownText;
+    public void UpdateRespawningCooldown(string text)
+    {
+        respawnCoolDownText.text = text;
+    }
+
+
+    public void DisplayAlertText()
+    {
+        StartCoroutine(FadeOutText(flowerAlertText));
+        isCompleteFade = false;
+    }
+    public float fadeSpeed = 0.01f;
+    private bool isCompleteFade = false;
+    IEnumerator FadeOutText(TextMeshProUGUI text)
+    {
+        text.transform.gameObject.SetActive(true);
+        if (!isCompleteFade)
+        {
+            while (text.color.a > 0)
+            {
+                text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - fadeSpeed);
+                yield return null;
+            }
+        }
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0f);
+        text.transform.gameObject.SetActive(false);
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1f);
+        isCompleteFade = true;
     }
 }

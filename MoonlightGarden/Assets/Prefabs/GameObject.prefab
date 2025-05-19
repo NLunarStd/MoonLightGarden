@@ -49,6 +49,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8887636468334162527
@@ -124,14 +127,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8887636468334162527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4b20bc1dca92b3438825197b50532c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   structureData: {fileID: 11400000, guid: 3a9d246eae1e796438f7d051717df912, type: 2}
-  monsterPrefab: {fileID: 2279888388797330058, guid: 5bf57328f664f514eb056911266b0b7d, type: 3}
+  monsterPrefab: {fileID: 7070745826061508958, guid: 01c2136666f676846b3d42026a349265, type: 3}
   summonPoint: {fileID: 7284762491712345680}
   summonRate: 5
   maxMonsters: 5
   summonRadius: 2
+  currentMonsters: 0

@@ -19,14 +19,19 @@ public class LobbyUIController : MonoBehaviour
     public SceneLoader sceneLoader;
     public TextMeshProUGUI playerLevel;
 
+
+    public LobbyUISoundControl lobbyUISoundControl;
+
     public void OpenShopPanel()
     {
         ShopPanel.gameObject.SetActive(true);
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
     }
 
     public void CloseShopPanel()
     {
         ShopPanel.gameObject.SetActive(false);
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.popSound);
     }
 
     public void UpdateCurrency()
@@ -40,12 +45,14 @@ public class LobbyUIController : MonoBehaviour
     public void ShowRewardGrant()
     {
         rewardGrantPanel.gameObject.SetActive(true);
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.rewardGrantSound);
     }
 
 
     public void OpenInputField()
     {
         inputFieldForName.gameObject.SetActive(true);
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
     }
 
     public Transform userPanel;
@@ -59,10 +66,12 @@ public class LobbyUIController : MonoBehaviour
         if (userPanel.gameObject.activeSelf)
         {
             userPanel.gameObject.SetActive(false);
+            lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.popSound);
         }
         else
         {
             userPanel.gameObject.SetActive(true);
+            lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
         }
     }
     public void ToggleConfirmation()
@@ -70,19 +79,26 @@ public class LobbyUIController : MonoBehaviour
         if (confirmPanel.gameObject.activeSelf)
         {
             confirmPanel.gameObject.SetActive(false);
+            lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.popSound);
         }
         else
         {
             confirmPanel.gameObject.SetActive(true);
+            lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
         }
     }
     public void CloseInputField()
     {
-        if (inputFieldForName != null)
+        if (inputFieldForName != null && inputFieldForName.text != "")
         {
             userName.text = inputFieldForName.text;
         }
+        else 
+        {
+            inputFieldForName.text = userName.text;
+        }
         inputFieldForName.gameObject.SetActive(false);
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.popSound);
         PlayerData data = new PlayerData();
         data.userName = userName.text;
         SaveSystem.SavePlayer(data);
@@ -111,6 +127,7 @@ public class LobbyUIController : MonoBehaviour
 
     public void ResetData()
     {
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.resetSound);
         PlayerData data = SaveSystem.LoadPlayer();
         PlayerData emptyData = new PlayerData();
         data = emptyData;
@@ -121,6 +138,7 @@ public class LobbyUIController : MonoBehaviour
 
     public void PlaySurviveMode()
     {
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
         if (characterSelector.currentSelectedCharacter.isUnlokced)
         {
             PlayerData data = SaveSystem.LoadPlayer();
@@ -137,5 +155,6 @@ public class LobbyUIController : MonoBehaviour
     {
         //SavePlayerData();
         LoadPlayerData();
+        lobbyUISoundControl = GetComponent<LobbyUISoundControl>();
     }
 }

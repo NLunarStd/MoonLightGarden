@@ -5084,11 +5084,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Doggo
-  maxHealth: 10
+  maxHealth: 30
   currentHealth: 0
   attack: 10
   armor: 0
-  moveSpeed: 100
+  moveSpeed: 10
   rotationSpeed: 100
   prefabs: {fileID: 0}
   monsterType: 1
@@ -5099,6 +5099,7 @@ MonoBehaviour:
   attackDamage: 10
   attackCooldown: 2
   attackSound: {fileID: 8300000, guid: b03c0f4b0e7c4674ba336478fdb927ca, type: 3}
+  knockBackPower: 0.6
 --- !u!70 &2484308306605570718
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5165,12 +5166,12 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 1
+  m_UseAutoMass: 0
+  m_Mass: 3
   m_LinearDamping: 0.3
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 834e1c620aa305b42a5330663a059ab3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5195,7 +5196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   seeker: {fileID: 0}
-  speed: 100
+  speed: 10
   nextWaypointDistance: 3
 --- !u!114 &2441352161124100682
 MonoBehaviour:
@@ -5237,7 +5238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fa4d4c2c9ea2a42a424552d0e54790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToDrop: {fileID: 0}
+  itemToDrop: {fileID: 6769206031220254780, guid: f1930363fa720834bafc895487268797, type: 3}
   amountToDrop: 1
   dropChance: 50
   spawnDropEffect: {fileID: 0}

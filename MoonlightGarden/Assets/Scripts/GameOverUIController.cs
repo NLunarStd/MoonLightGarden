@@ -46,6 +46,8 @@ public class GameOverUIController : MonoBehaviour
     public bool isCompleteShowScore = false;
     public IEnumerator UpdateScoreText()
     {
+        GameManager.instance.soundManager.playerSource.Pause();
+        GameManager.instance.soundManager.playerSource.PlayOneShot(GameManager.instance.soundManager.calculatedSound);
         yield return new WaitForSeconds(1);
         StartCoroutine(ShowScore(dayScore));
         StartCoroutine(ShowScore(killScore));
@@ -59,6 +61,7 @@ public class GameOverUIController : MonoBehaviour
     IEnumerator ShowScore(TextMeshProUGUI TMP)
     {
         bool isCompleteFade = false;
+        
         if (!isCompleteFade)
         {
             while (TMP.color.a > 0)
@@ -103,7 +106,10 @@ public class GameOverUIController : MonoBehaviour
     public SceneLoader sceneLoader;
     public IEnumerator ChanageTextValue(TextMeshProUGUI text)
     {
-        while(currentExp < totalAccumulatedExp)
+        GameManager.instance.soundManager.playerSource.Pause();
+        GameManager.instance.soundManager.playerSource.PlayOneShot(GameManager.instance.soundManager.getShardSound);
+        
+        while (currentExp < totalAccumulatedExp)
         {
             currentExp += 1;
             currentExptxt.text = $"{currentExp.ToString()}  / {currentExpRequire.ToString()}";

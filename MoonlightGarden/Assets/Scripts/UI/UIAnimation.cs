@@ -14,14 +14,17 @@ public class UIAnimation : MonoBehaviour
     private Vector2 uiToMoveInOriginalPosition;
     private bool isMoving = false;
 
+    public LobbyUISoundControl lobbyUISoundControl;
     private void Start()
     {
         uiToMoveOutOriginalPosition = uiToMoveOut.anchoredPosition;
         uiToMoveInOriginalPosition = uiToMoveIn.anchoredPosition;
+        lobbyUISoundControl = GetComponent<LobbyUISoundControl>();
     }
 
     public void MoveUIOutAndIn()
     {
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
         if (isMoving) return;
         if (isMoveToCharacterState) return;
         StartCoroutine(MoveUI(uiToMoveOut, -moveDistance, uiToMoveIn, -moveDistance));
@@ -30,6 +33,7 @@ public class UIAnimation : MonoBehaviour
 
     public void MoveUIBack()
     {
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
         if (isMoving) return;
         StartCoroutine(MoveUI(uiToMoveOut, moveDistance, uiToMoveIn, moveDistance));
         isMoveToCharacterState = false;

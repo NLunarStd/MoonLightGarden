@@ -9,9 +9,13 @@ public class CharacterSelector : MonoBehaviour
     public List<PlayableCharacter> characterList;
     public PlayableCharacter currentSelectedCharacter;
     public CharacterPanelManager characterPanelManager;
+
+
+    public LobbyUISoundControl lobbyUISoundControl;
     public void Start()
     {
         UpdateSelectedCharacter();
+        lobbyUISoundControl = GetComponent<LobbyUISoundControl>();
     }
 
     public void SelectPreviousCharacter()
@@ -22,6 +26,7 @@ public class CharacterSelector : MonoBehaviour
             currentIndex = characterList.Count - 1;
         }
         UpdateSelectedCharacter();
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
     }
 
     public void SelectNextCharacter()
@@ -32,6 +37,7 @@ public class CharacterSelector : MonoBehaviour
             currentIndex = 0;
         }
         UpdateSelectedCharacter();
+        lobbyUISoundControl.uiAudioSource.PlayOneShot(lobbyUISoundControl.clickSound);
     }
     void UpdateSelectedCharacter()
     {

@@ -50,7 +50,7 @@ public class AIMove : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
         Vector2 force = direction * speed * Time.fixedDeltaTime;
 
-        GetComponent<Rigidbody2D>().AddForce(force,ForceMode2D.Force);
+        GetComponent<Rigidbody2D>().AddForce(force,ForceMode2D.Impulse);
 
         float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)

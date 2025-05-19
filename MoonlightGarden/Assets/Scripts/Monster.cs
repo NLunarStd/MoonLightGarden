@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class Monster : Character
@@ -55,6 +56,7 @@ public class Monster : Character
             else
             {
                 gameObject.SetActive(false); // ถ้าไม่มี SummonTower ให้ปิดใช้งาน GameObject
+                GameManager.instance.enemyOverAllControl.monsterInScene.Remove(transform.gameObject);
             }
             currentHealth = MaxHealth;
 
@@ -77,14 +79,17 @@ public class Monster : Character
     private float nextAttackTime = 0f;
 
     public AudioClip attackSound;
+
+    public float knockBackPower = 0.6f;
     public void Attack()
     {
         if (Time.time >= nextAttackTime)
         {
             //Debug.Log($"Monster {monsterType} attacks!");
-            GameManager.instance.soundManager.playerSource.PlayOneShot(attackSound);
+            GameManager.instance.soundManager.PlayOneShotWithVaryPitch(GameManager.instance.soundManager.monsterSource, attackSound);
            
             GameManager.instance.playerController.TakeDamage(attackDamage);
+            GameManager.instance.playerCharacter.GetKnockBack(knockBackPower, transform.position - GameManager.instance.playerCharacter.transform.position);
             nextAttackTime = Time.time + attackCooldown;
         }
     }
@@ -92,8 +97,7 @@ public class Monster : Character
     {
         if (Time.time >= nextAttackTime)
         {
-            //Debug.Log($"Monster {monsterType} attacks!");
-            GameManager.instance.soundManager.playerSource.PlayOneShot(attackSound);
+            GameManager.instance.soundManager.PlayOneShotWithVaryPitch(GameManager.instance.soundManager.monsterSource, attackSound);
             GameManager.instance.flowerTransform.GetComponent<MoonFlower>().TakeDamage();
             nextAttackTime = Time.time + attackCooldown;
         }
@@ -101,5 +105,10 @@ public class Monster : Character
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+    }
+
+    public void GetKnockBack(float power)
+    {
+        rb2D.AddForce(-Direction.normalized * power,ForceMode2D.Impulse);
     }
 }

@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public Transform targetSelection;
 
     public float moveSpeed;
-    Rigidbody2D rb2D;
+    public Rigidbody2D rb2D;
     public bool isWalking = false;
 
     public Animator animator;
@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         actionInteract.action.started -= ActionInteract;
     }
+    public AudioClip buildSound;
     public void UseItem()
     {
         if (interactor.currentInteractable != null)
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
                     if (selectedInventorySlot.currentItem.GetComponent<BuildingItem>() != null)
                     {
                         uiController.PlaceBuilding();
+                        GameManager.instance.soundManager.PlayOneShotWithVaryPitch(GameManager.instance.soundManager.playerSource,buildSound);
                     }
                     else
                     {
@@ -134,7 +136,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    public SpriteRenderer walkSmoke;
     private void Update()
     {
         GameManager.instance.playerController = this;
@@ -147,11 +149,22 @@ public class PlayerController : MonoBehaviour
             UpdateHandPoint(); 
             UpdateWeaponSortingOrder();
             LastestDirection = GetDirectionIndex();
+            walkSmoke.enabled = true;
+            if (inputVector.x > 0)
+            {
+                walkSmoke.flipX = false;
+                walkSmoke.transform.localPosition = new Vector2(-0.222f, -1.543f);
+            }
+            else
+            {
+                walkSmoke.flipX = true;
+                walkSmoke.transform.localPosition = new Vector2(0.222f, -1.543f);
+            }
         }
         else
         {
             isWalking = false;
-            
+            walkSmoke.enabled = false;
         }
         UpdateAnimation();
     }

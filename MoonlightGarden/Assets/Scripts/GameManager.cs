@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public LightCycleController lightCycleController;
     public PlayerController playerController;
+    public PlayerCharacter playerCharacter;
     public UIController uIController;
     public ResourceManager resourceManager;
     public Inventory inventory;
@@ -28,7 +29,9 @@ public class GameManager : MonoBehaviour
     public SoundManager soundManager;
     public GameOverUIController gameOverUIController;
     public SessionData sessionData;
+    public EnemyOverAllControl enemyOverAllControl;
     public string playerName;
+    public string playingCharacter;
 
     public int currentDay = 1;
 
@@ -56,9 +59,16 @@ public class GameManager : MonoBehaviour
         soundManager = GetComponent<SoundManager>();
         sessionData = GetComponent<SessionData>();
 
-
+        LoadPlayerData();
         uIController.UpdateDayText(currentDay);
         uIController.UpdatePlayerName();
+    }
+
+    public void LoadPlayerData()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        playerName = data.userName;
+        playingCharacter = data.currentSelectedCharacterName;
     }
     private void Update()
     {
@@ -70,11 +80,24 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Play:
+                Time.timeScale = 1;
+                soundManager.bgmSource.clip = soundManager.bgmSound;
+                soundManager.bgmSource.loop = true;
+                soundManager.bgmSource.Play();
                 isGameOver = false;
+                playerCharacter.SetToDeadState();
+                flowerTransform.GetComponent<MoonFlower>().SetToDeadState();
                 break;
-            case GameState.Pause: break;
+            case GameState.Pause:
+                Time.timeScale = 0;
+                break;
             case GameState.GameOver:
                 isGameOver = true;
+                enemyOverAllControl.SetAllToStop();
+                playerCharacter.SetToDeadState();
+                flowerTransform.GetComponent<MoonFlower>().SetToDeadState();
+                soundManager.bgmSource.loop = false;
+                soundManager.bgmSource.PlayOneShot(soundManager.gameOverSound);
                 gameOverUIController.gameObject.SetActive(true);
                 break;
         }

@@ -20,14 +20,16 @@ public class Weapon : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         triggerAttackMonster = GetComponent<TriggerAttackMonster>();
-        triggerAttackMonster.damageToInflicted = damage;
+        int v = damage + GameManager.instance.playerCharacter.Attack;
+        int finalDamage = v;
+        triggerAttackMonster.damageToInflicted = finalDamage;
         collider2D = GetComponent<Collider2D>();
     }
 
     public virtual void Attack()
     {
         EnableHitbox();
-        GameManager.instance.soundManager.playerSource.PlayOneShot(attackSound);
+        GameManager.instance.soundManager.PlayOneShotWithVaryPitch(GameManager.instance.soundManager.playerSource, attackSound);
         triggerAttackMonster.isAttacking = true;
     }
 

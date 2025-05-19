@@ -67,5 +67,14 @@ public class SoundManager : MonoBehaviour
             masterMixer.SetFloat("bgmVolume", -80);
     }
 
+    public void PlayOneShotWithVaryPitch(AudioSource audioSource,AudioClip audioClip)
+    {
+        float randomPitch = Random.Range(1.0f, 3.0f);
+        audioSource.pitch = randomPitch;
+        audioSource.PlayOneShot(audioClip);
+    }
 
+    public AudioClip gameOverSound;
+    public AudioClip calculatedSound;
+    public AudioClip getShardSound;
 }

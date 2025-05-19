@@ -70,6 +70,7 @@ public class SummonTower : Structure
         {
             monster.transform.position = spawnPosition;
             monster.SetActive(true); 
+            GameManager.instance.enemyOverAllControl.monsterInScene.Add(monster);
         }
     }
 
@@ -89,6 +90,7 @@ public class SummonTower : Structure
     {
         monster.SetActive(false);
         currentMonsters -= 1;
+        GameManager.instance.enemyOverAllControl.monsterInScene.Remove(monster);
     }
 
     protected override void DestroyStructure()

@@ -34,18 +34,24 @@ public class EnemyBehhaviour : MonoBehaviour
         {
             ChangeState(EnemyState.AttackBase);
         }
-        if (distanceToPlayer <= monster.detectionRange && distanceToFlower >= distanceToPlayer)
+        if (GameManager.instance.playerCharacter.isPlayerDead)
         {
+            ChangeState(EnemyState.FindFlower);
+        }
+        else if (distanceToPlayer <= monster.detectionRange && distanceToFlower >= distanceToPlayer)
+        {
+
             ChangeState(EnemyState.ChasePlayer);
             if (distanceToPlayer <= attackDistance)
             {
+
                 ChangeState(EnemyState.Attack);
 
             }
             else
             {
                 ChangeState(EnemyState.ChasePlayer);
-                
+
             }
         }
         
@@ -90,6 +96,7 @@ public class EnemyBehhaviour : MonoBehaviour
                 break;
             case EnemyState.TakeDamage:
                 hitParticle.Play();
+                monster.GetKnockBack(1.5f);
                 break;
             case EnemyState.Die:
                 _AIMove.enabled = false; // หยุดการเคลื่อนที่

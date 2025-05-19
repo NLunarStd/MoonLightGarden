@@ -24,8 +24,7 @@ public class LightCycleController : MonoBehaviour
     private bool isWaiting = false; 
     public bool isNightTime = false;
     
-
-    
+    public WhiteBalance whiteBalance;
     private void Start()
     {
         SetUPColor();
