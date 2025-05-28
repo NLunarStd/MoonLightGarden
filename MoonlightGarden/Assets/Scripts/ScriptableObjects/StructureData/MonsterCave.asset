@@ -15,6 +15,6 @@ MonoBehaviour:
   structureName: Structure
   health: 100
   maxHealth: 100
-  visualPrefab: {fileID: 8887636468334162527, guid: 6f318a1f0d064b74fa0962a792dbbd08, type: 3}
+  visualPrefab: {fileID: -2253911629886400664, guid: 5b875319fcaefb14f828d2c2c6e9e0bd, type: 3}
   buildTime: 5
   repairTime: 3

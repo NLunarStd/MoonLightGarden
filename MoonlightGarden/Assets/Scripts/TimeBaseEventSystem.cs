@@ -37,28 +37,32 @@ public class TimeBaseEventSystem : MonoBehaviour
 
     public void ActivateMonsterLocation()
     {
-        foreach (Transform t in monsterLocations)
+        foreach (Transform monsterNest in monsterLocations)
         {
-            if (!t.GetComponent<SummonTower>())
+            if (!monsterNest.GetComponent<SummonTower>())
             {
                 continue;
             }
-            t.GetComponent<SummonTower>().enabled = true;
+            monsterNest.GetComponent<SummonTower>().enabled = true;
           
         }
     }
 
     public void DeactivateMonsterLocation()
     {
-        foreach (Transform t in monsterLocations)
+        foreach (Transform monsterNest in monsterLocations)
         {
-            if (!t.GetComponent<SummonTower>())
+            if (!monsterNest.GetComponent<SummonTower>())
             {
                 continue;
             }
-            t.GetComponent<SummonTower>().enabled = false;
+            monsterNest.GetComponent<SummonTower>().enabled = false;
+            foreach (Transform monster in monsterNest)
+            {
+                monster.transform.localPosition = Vector3.zero;
+            }
         }
-        GameManager.instance.enemyOverAllControl.DestroyAllMonsterInScene();
+        //GameManager.instance.enemyOverAllControl.DestroyAllMonsterInScene();
     }
 
 
