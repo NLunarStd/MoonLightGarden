@@ -27,4 +27,5 @@ public class EnemyOverAllControl : MonoBehaviour
             if (monster.GetComponent<Monster>() != null) monster.GetComponent<Monster>().TakeDamage(99999);
         }
     }
+
 }

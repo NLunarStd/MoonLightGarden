@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MoonFlower : Interactable
@@ -15,6 +16,7 @@ public class MoonFlower : Interactable
     {
         currentHealth = health;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        StartSeedCycle();
     }
     public override void UseItem(PlayerController player)
     {
@@ -74,5 +76,63 @@ public class MoonFlower : Interactable
             transform.GetComponent<Collider2D>().enabled = true;
         }
 
+    }
+
+    public int nutrientValue = 100;
+    public int seedTime = 180;
+    public TextMeshProUGUI nutrientText;
+    public TextMeshProUGUI seedTimeText;
+    float timer = 180;
+    public bool isAbleToGrantSeed = false;
+    public Transform grantSeedPosition;
+    private void Update()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                timer = 0;
+            }
+            DisplayTime(timer);
+        }
+        else
+        {
+            if(nutrientValue > 20)
+            {
+                isAbleToGrantSeed = true;
+                // send seed
+                if (isAbleToGrantSeed)
+                {
+                    AbsorbNutrient(-20);
+                    isAbleToGrantSeed = false ;
+                }
+            }
+            StartSeedCycle();
+        }
+    }
+    public void StartSeedCycle()
+    {
+        timer = seedTime;
+    }
+    public void AbsorbNutrient(int value)
+    {
+        UpdateNutrient(value);
+        if(nutrientValue <= 0)
+        {
+            TakeDamage();
+        }
+    }
+    public void DisplayTime(float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        seedTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    public void UpdateNutrient(int value)
+    {
+        nutrientValue += value;
+        nutrientText.text = $"Nutrient : {nutrientValue}";
     }
 }

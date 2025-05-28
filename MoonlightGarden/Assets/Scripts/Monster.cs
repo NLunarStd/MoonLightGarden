@@ -65,6 +65,7 @@ public class Monster : Character
             spriteRenderer.color = originalColor;
             GetComponent<EnemyBehhaviour>().ChangeState(EnemyBehhaviour.EnemyState.Die);
             GameManager.instance.sessionData.totalKill += 1;
+            GameManager.instance.flowerTransform.GetComponent<MoonFlower>().UpdateNutrient(10);
         }
     }
 
