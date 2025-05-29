@@ -98,11 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 63f34068e7597c542a499583363b199a, type: 2}
   collider2D: {fileID: 0}
-  buildingPrefab: {fileID: 7236807810204370929}
+  buildingPrefab: {fileID: 2381214431552479047, guid: b1d542ed74eecf647b1b966da180dc6a, type: 3}
   buildPositionTransform: {fileID: 0}
   grid: {fileID: 0}
   buildPosition: {x: 0, y: 0, z: 0}
-  buildSound: {fileID: 8300000, guid: 8a302b10af28afe4fa4750be845157ee, type: 3}
 --- !u!212 &1855100395933552997
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -147,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4ba35d681747dff48a1bd81f7140ed98, type: 3}
+  m_Sprite: {fileID: -17525387853972369, guid: cea11b661d3fe134b90de064b08a5372, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

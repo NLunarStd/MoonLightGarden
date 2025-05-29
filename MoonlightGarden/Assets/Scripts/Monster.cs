@@ -66,7 +66,7 @@ public class Monster : Character
             GetComponent<EnemyBehhaviour>().ChangeState(EnemyBehhaviour.EnemyState.Die);
             GameManager.instance.sessionData.totalKill += 1;
             GameManager.instance.flowerTransform.GetComponent<MoonFlower>().UpdateNutrient(10);
-            Debug.LogError($"{name} died!!!!!!!");
+           // Debug.LogError($"{name} died!!!!!!!");
         }
     }
 
