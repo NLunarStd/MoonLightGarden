@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Rendering.HighDefinition;
 public class BloodMoonController : MonoBehaviour
 {
     bool isStartBloodMoon = false;
@@ -39,6 +38,22 @@ public class BloodMoonController : MonoBehaviour
             isStartBloodMoon = true;
             wb.tint.Override(tintValue);
             wb.temperature.Override(tintValue);
+
+            if (isStartBloodMoon)
+            {
+                summonTower.enabled = true;
+                summonTower.StartSummon();
+            }
+            else
+            {
+                summonTower.enabled = false;
+                summonTower.StopSummon();
+                foreach (Transform monster in gameObject.transform)
+                {
+                    summonTower.ReturnToPool(monster.gameObject);
+                    monster.localPosition = Vector3.zero;
+                }
+            }
         }
         else
         {
@@ -47,20 +62,6 @@ public class BloodMoonController : MonoBehaviour
             wb.temperature.Override(0);
         }
 
-        if (isStartBloodMoon)
-        {
-            summonTower.enabled = true;
-            summonTower.StartSummon();
-        }
-        else
-        {
-            summonTower.enabled = false;
-            summonTower.StopSummon();
-            foreach (Transform monster in gameObject.transform)
-            {
-                summonTower.ReturnToPool(monster.gameObject);
-                monster.localPosition = Vector3.zero;
-            }
-        }
+        
     }
 }

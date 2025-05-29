@@ -24,8 +24,6 @@ public class ContinueGaneOverControl : MonoBehaviour, IUnityAdsLoadListener, IUn
         _showAdButton.interactable = false;
     }
 
-    bool stopCoroutine = false;
-    Coroutine runningCoroutine;
     void Start()
     {
         // Load the first ad when the script starts, if Unity Ads is initialized
@@ -79,6 +77,7 @@ public class ContinueGaneOverControl : MonoBehaviour, IUnityAdsLoadListener, IUn
     }
     GameOverUIController gameOverUIController;
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
+    public Transform gameOverCanvas;
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
@@ -88,15 +87,16 @@ public class ContinueGaneOverControl : MonoBehaviour, IUnityAdsLoadListener, IUn
             if (!isGrantReward)
             {
                 isGrantReward = true;
-                stopCoroutine = false;
                 GameManager.instance.flowerTransform.GetComponent<MoonFlower>().ResetHealth();
-                gameOverUIController.CloseContinuePanel();
-                gameOverUIController.gameObject.SetActive(false);
-             GameManager.instance.UpdateGameState(GameManager.GameState.Play);
+                gameOveredCanvas.transform.gameObject.SetActive(false);
+                GameManager.instance.isGameOver = false;
+                GameManager.instance.UpdateGameState(GameManager.GameState.Play);
+
             }
-            isGrantReward = false;
+            
             LoadAd();
         }
+        isGrantReward = false;
     }
     bool isGrantReward = false;
 
@@ -120,5 +120,23 @@ public class ContinueGaneOverControl : MonoBehaviour, IUnityAdsLoadListener, IUn
     {
         // Clean up the button listeners:
         _showAdButton.onClick.RemoveAllListeners();
+    }
+    public Canvas gameOveredCanvas;
+    public void PayMoonlightShard()
+    {
+       
+        PlayerData playerData = SaveSystem.LoadPlayer();
+
+        if(CurrencyManager.instance.GetMoonlightShard() < 100)
+        {
+            return;
+        }
+        CurrencyManager.instance.UpdateMoonlightShard(-100);
+        SaveSystem.SavePlayer(playerData);
+
+        GameManager.instance.flowerTransform.GetComponent<MoonFlower>().ResetHealth();
+        gameOveredCanvas.transform.gameObject.SetActive(false);
+        GameManager.instance.isGameOver = false;
+        GameManager.instance.UpdateGameState(GameManager.GameState.Play);
     }
 }

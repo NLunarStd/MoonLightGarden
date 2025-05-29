@@ -12,6 +12,12 @@ public class CurrencyManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            PlayerData playerData = SaveSystem.LoadPlayer();
+            if (playerData != null)
+            {
+                UpdateMoonlightShard(playerData.currentMoonlightShard);
+                Debug.LogError(playerData.currentMoonlightShard);
+            }
         }
         else
         {
