@@ -19,7 +19,19 @@ public class SummonTower : Structure
     {
         base.OnStructureBuilt();
         CreatePool(); 
+        
+    }
+    bool isCoroutineStarted = false;
+    public void StartSummon()
+    {
+        if (isCoroutineStarted) return;
         StartCoroutine(SummonMonsterRoutine());
+        isCoroutineStarted = true;
+    }
+    public void StopSummon()
+    {
+        StopCoroutine(SummonMonsterRoutine());
+        isCoroutineStarted = false;
     }
 
     private void CreatePool()

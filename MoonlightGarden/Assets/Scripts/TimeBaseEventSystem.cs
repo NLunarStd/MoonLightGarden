@@ -44,7 +44,7 @@ public class TimeBaseEventSystem : MonoBehaviour
                 continue;
             }
             monsterNest.GetComponent<SummonTower>().enabled = true;
-          
+            monsterNest.GetComponent<SummonTower>().StartSummon();
         }
     }
 
@@ -61,6 +61,7 @@ public class TimeBaseEventSystem : MonoBehaviour
             {
                 monster.transform.localPosition = Vector3.zero;
             }
+            monsterNest.GetComponent<SummonTower>().StopSummon();
         }
         //GameManager.instance.enemyOverAllControl.DestroyAllMonsterInScene();
     }

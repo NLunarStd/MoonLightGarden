@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,17 +16,18 @@ public class PlayerData
 
     //public Vector3 playerPosition;
     public float[] position;
-    
+
+    public List<string> unlockedRecipeNames = new List<string>();
+    public List<string> toUnlockRecipeNames = new List<string>();
+
     public PlayerData(GameManager gameManager) 
     {
         currentDay = gameManager.currentDay;
-
-     
-        
         position = new float[3];
         position[0] = gameManager.playerController.transform.position.x;
         position[1] = gameManager.playerController.transform.position.y;
         position[2] = gameManager.playerController.transform.position.z;
+               
     }
     public PlayerData()
     {

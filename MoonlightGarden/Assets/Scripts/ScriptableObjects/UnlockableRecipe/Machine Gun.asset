@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5708c9c98f26dbb4b9ea2698c411bab1, type: 3}
+  m_Name: Machine Gun
+  m_EditorClassIdentifier: 
+  name: Machine Gun
+  isUnklocked: 0
+  isRepeatUnlockable: 0
+  stacked: 0
+  maxStacked: 1
+  itemTier: 3
+  type: 0
+  priorUnlokcedNeed: {fileID: 11400000, guid: 3debf2ea26e22a24892a524fbf19d4a2, type: 2}
+  isDefaultUnlocked: 0
